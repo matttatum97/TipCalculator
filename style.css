@@ -21,6 +21,12 @@ body {
     /* max-width: 50px; */
 }
 
+.bill {
+    border-style: solid;
+}
+
+
+
 .custom-row-1, .custom-row-2{
     /* background-color: bisque; */
     justify-content: center;
@@ -38,13 +44,21 @@ body {
     align-items: center;
 }
 
+.form-select {
+    border-style: solid;
+}
+
 .custom-row-4{
     justify-content: space-around;
     text-align: center;
     
 }
 
-select { width: 400px; text-align-last:center; }
+select { 
+    width: 400px; 
+    text-align-last:center; 
+    border-style: solid;
+}
 
 option{
     text-align-last: center;
@@ -56,12 +70,11 @@ option{
     
 }
 
+
 .tipInfo {
-    border-style: dotted;
     margin-bottom: 2%;
-    margin-left: 75vh;
-    margin-right: 75vh;
 }
+
 
 #bill-header{
     text-decoration: underline;

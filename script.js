@@ -5,7 +5,6 @@ const calculatBtn = document.getElementById("calculate")
 const resetBtn = document.getElementById("reset")
 const tipContainer = document.querySelector(".tipContainer")
 let myStorage = window.localStorage
-let add1Btn = document.getElementById('moreTipBtn')
 let counter = 0
 
 //localStorage.clear()
@@ -17,11 +16,18 @@ calculatBtn.addEventListener('click', () => {
         tipReturn = calculateTip(+bill, +tip)
         const newDiv = document.createElement('div')
         newDiv.classList.add("tipInfo")
-        newDiv.innerHTML = `${tipReturn}`
+        newDiv.innerHTML = `
+        <form id="newBill">
+            <input class="bill" type="text" id="${counter}" value="${tipReturn}"/>
+        </form>
+        
+        <button class="btn btn-outline-secondary update" value="${counter}">Update</button>
+        <button class="btn btn-outline-secondary delete" value="${counter}">X</button>`
         tipContainer.appendChild(newDiv)
         localStorage.setItem(counter, tipReturn)
         counter++
         localStorage.setItem('counter', counter)
+        activateBtns()
 
     } else {
         alert("Both bill amount and tip amount must be selected")
@@ -37,23 +43,12 @@ resetBtn.addEventListener('click', () => {
     counter = 0
 })
 
-add1Btn.addEventListener('click', () => {
-    if(localStorage.getItem('counter')) {
-        counter = localStorage.getItem("counter")
-        for (let i = 0; i < counter; i++) {
-            console.log(localStorage.getItem(i))
-            const current = +localStorage.getItem(i) + 1
-            localStorage.setItem(i, current.toFixed(2))
-        }
-        removeElements()
-        addElements()
 
-    }
-})
 
 window.addEventListener('load', () => {
     if(localStorage.getItem('counter')) {
         addElements()
+        activateBtns()
     }
     
 })
@@ -69,18 +64,45 @@ function calculateTip(bill, tip) {
 function removeElements() {
     tipContainer.querySelectorAll('.tipInfo').forEach((e) => {
         e.remove()
-        
     })
 }
 
 function addElements() {
     counter = localStorage.getItem("counter")
     for (let i = 0; i < counter; i++) {
-        const newDiv = document.createElement('div')
-        newDiv.classList.add("tipInfo")
-        newDiv.innerHTML = `${localStorage.getItem(i)}`
-        tipContainer.appendChild(newDiv)
+        if (localStorage.getItem(i)) {
+            const newDiv = document.createElement('div')
+            newDiv.classList.add("tipInfo")
+            newDiv.innerHTML = `
+            <form id="newBill">
+                <input class="bill" type="text" id="${i}" value="${localStorage.getItem(i)}"/>
+            </form>
+            
+            <button class="btn btn-outline-secondary update" value="${i}">Update</button>
+            <button class="btn btn-outline-secondary delete" value="${i}">X</button>`
+            tipContainer.appendChild(newDiv)
+        }
     }
+}
+
+function activateBtns() {
+    let updateBtns = document.querySelectorAll('.update')
+    let deleteBtns = document.querySelectorAll('.delete')
+    updateBtns.forEach((btn) => {
+
+        btn.addEventListener('click', () => {
+            localStorage.setItem(btn.value, document.getElementById(`${btn.value}`).value)
+        })
+    })
+    deleteBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            console.log('hi')
+            localStorage.removeItem(btn.value)
+            removeElements()
+            addElements()
+            activateBtns()
+        })
+    }) 
 }
 
 
