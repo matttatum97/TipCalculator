@@ -12,7 +12,8 @@ let counter = 0
 calculatBtn.addEventListener('click', () => {
     let bill = billAmount.value
     let tip = tipAmount.value
-    if (bill && tip) {
+    console.log()
+    if (bill && tip && !isNaN(Number(bill))) {
         tipReturn = calculateTip(+bill, +tip)
         const newDiv = document.createElement('div')
         newDiv.classList.add("tipInfo")
@@ -31,7 +32,7 @@ calculatBtn.addEventListener('click', () => {
         clearCalc()
 
     } else {
-        alert("Both bill amount and tip amount must be selected")
+        alert("Both bill amount and tip amount must be selected and bill must be a number")
     }
         
     
