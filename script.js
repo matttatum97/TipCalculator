@@ -96,7 +96,6 @@ function activateBtns() {
     })
     deleteBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
-            console.log('hi')
             localStorage.removeItem(btn.value)
             removeElements()
             addElements()

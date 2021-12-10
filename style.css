@@ -2,8 +2,10 @@
 
 body {
     background-color: lightgreen;
+    font-family: monospace;
 }
 .container{
+    width: 600px;
     margin-top: 5%;
     padding-bottom: 5%;
     padding-top: 10%;
@@ -12,9 +14,13 @@ body {
     background-color: bisque;
 }
  h1 {
-    color: rgb(9, 80, 9);
+    color: black;
+    font-family: monospace;
+    text-decoration: underline;
+    font-size: 50px;
 
 }; 
+
 
 #tipAmount {
     /* display: flex; */
@@ -23,6 +29,9 @@ body {
 
 .bill {
     border-style: solid;
+    margin-bottom: 1%;
+    font-size: 25px;
+    text-align: center;
 }
 
 
@@ -36,7 +45,6 @@ body {
 
 .custom-row-3{
     max-width: 300px;
-    margin: 3%;
     position: relative;
         left: 50%;
         transform: translateX(-63%);
@@ -46,6 +54,8 @@ body {
 
 .form-select {
     border-style: solid;
+    padding: 0;
+    width: 370px
 }
 
 .custom-row-4{
@@ -78,7 +88,11 @@ option{
 
 #bill-header{
     text-decoration: underline;
+    margin-top: 5%;
 }
+
+
+
 
 
 
