@@ -7,19 +7,21 @@ const tipContainer = document.querySelector(".tipContainer")
 let myStorage = window.localStorage
 let counter = 0
 
-//localStorage.clear()
 
+
+//Creates a new tip
 calculatBtn.addEventListener('click', () => {
     let bill = billAmount.value
     let tip = tipAmount.value
     console.log()
+    //Checks if there is a bill and tip and if the bill is a number
     if (bill && tip && !isNaN(Number(bill))) {
         tipReturn = calculateTip(+bill, +tip)
         const newDiv = document.createElement('div')
         newDiv.classList.add("tipInfo")
         newDiv.innerHTML = `
         <form id="newBill">
-            <input class="bill" type="text" id="${counter}" value="${tipReturn}"/>
+            <input class="bill bill2" type="text" id="${counter}" value="${tipReturn}"/>
         </form>
         
         <button class="btn btn-outline-secondary update" value="${counter}">Update</button>
@@ -38,6 +40,7 @@ calculatBtn.addEventListener('click', () => {
     
 })
 
+//Resets the local storage
 resetBtn.addEventListener('click', () => {
     localStorage.clear()
     removeElements()
@@ -46,7 +49,7 @@ resetBtn.addEventListener('click', () => {
 })
 
 
-
+//Resets the page when the page is reloaded. 
 window.addEventListener('load', () => {
     if(localStorage.getItem('counter')) {
         addElements()
@@ -56,6 +59,7 @@ window.addEventListener('load', () => {
 })
 
 
+//Calcuates the tip value to two decimal places
 function calculateTip(bill, tip) {
     let total = 0
     tip = tip / 100
@@ -63,12 +67,14 @@ function calculateTip(bill, tip) {
     return total 
 }
 
+//Removes all the tip elements
 function removeElements() {
     tipContainer.querySelectorAll('.tipInfo').forEach((e) => {
         e.remove()
     })
 }
 
+//Adds all the tip elements
 function addElements() {
     counter = localStorage.getItem("counter")
     for (let i = 0; i < counter; i++) {
@@ -77,7 +83,7 @@ function addElements() {
             newDiv.classList.add("tipInfo")
             newDiv.innerHTML = `
             <form id="newBill">
-                <input class="bill" type="text" id="${i}" value="${localStorage.getItem(i)}"/>
+                <input class="bill bill2" type="text" id="${i}" value="${localStorage.getItem(i)}"/>
             </form>
             
             <button class="btn btn-outline-secondary update" value="${i}">Update</button>
@@ -87,15 +93,18 @@ function addElements() {
     }
 }
 
+//Activates the buttons on each tip by adding event listners.
 function activateBtns() {
     let updateBtns = document.querySelectorAll('.update')
     let deleteBtns = document.querySelectorAll('.delete')
+    //adds event listern for each update btn
     updateBtns.forEach((btn) => {
 
         btn.addEventListener('click', () => {
             localStorage.setItem(btn.value, document.getElementById(`${btn.value}`).value)
         })
     })
+    //adds event listener for each delet btn
     deleteBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
             localStorage.removeItem(btn.value)
@@ -106,6 +115,7 @@ function activateBtns() {
     }) 
 }
 
+//Clears the bill amount and resets the tip amount after calculate
 function clearCalc() {
     billAmount.value = ""
     tipAmount.value = ""

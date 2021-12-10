@@ -34,6 +34,11 @@ body {
     text-align: center;
 }
 
+.bill2 {
+    background-color: transparent;
+    border-style: none;
+}
+
 
 
 .custom-row-1, .custom-row-2{
