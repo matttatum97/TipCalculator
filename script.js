@@ -28,6 +28,7 @@ calculatBtn.addEventListener('click', () => {
         counter++
         localStorage.setItem('counter', counter)
         activateBtns()
+        clearCalc()
 
     } else {
         alert("Both bill amount and tip amount must be selected")
@@ -81,7 +82,7 @@ function addElements() {
             <button class="btn btn-outline-secondary update" value="${i}">Update</button>
             <button class="btn btn-outline-secondary delete" value="${i}">X</button>`
             tipContainer.appendChild(newDiv)
-        }
+        } 
     }
 }
 
@@ -102,6 +103,11 @@ function activateBtns() {
             activateBtns()
         })
     }) 
+}
+
+function clearCalc() {
+    billAmount.value = ""
+    tipAmount.value = ""
 }
 
 
